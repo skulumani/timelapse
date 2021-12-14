@@ -21,8 +21,8 @@ for filename in "${IMAGE_DIR}${LAST_MONTH}"*_BACK.mp4; do
 done
 
 # concat mp4s
-ffmpeg -r 30 -f concat -safe 0 -i ${FRONT_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_FRONT.mp4
-ffmpeg -r 30 -f concat -safe 0 -i ${BACK_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_BACK.mp4 
+ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${FRONT_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_FRONT.mp4
+ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${BACK_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_BACK.mp4 
 
 # delete mp4s
 
@@ -36,3 +36,20 @@ rm ${FRONT_FILES}
 rm ${BACK_FILES}
 
 # Upload to youtube
+conda activate timelapse
+
+youtube-upload \
+    --title="${LAST_MONTH}" \
+    --description="Timelapse video" \
+    --client-secrets="client_secrets.json" \
+    --playlist="Timelapse Front" \
+    --privacy="private" \
+    ${IMAGE_DIR}${LAST_MONTH}_FRONT.mp4 
+
+youtube-upload \
+    --title="${LAST_MONTH}" \
+    --description="Timelapse video" \
+    --client-secrets="client_secrets.json" \
+    --playlist="Timelapse Back" \
+    --privacy="private" \
+    ${IMAGE_DIR}${LAST_MONTH}_BACK.mp4 
