@@ -1,0 +1,10 @@
+name: timelapse
+channels:
+  - defaults
+dependencies:
+  - python=3
+  - pip
+  - pip:
+    - google-api-python-client 
+    - oauth2client 
+    - progressbar2
