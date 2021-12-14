@@ -10,6 +10,9 @@ IMAGE_DIR="/media/shankar/data/timelapse/"
 FRONT_FILES="${IMAGE_DIR}front.txt"
 BACK_FILES="${IMAGE_DIR}back.txt"
 
+FRONT_VIDEO="${IMAGE_DIR}/monthly/${LAST_MONTH}_FRONT.mp4"
+BACK_VIDEO="${IMAGE_DIR}/monthly/${LAST_MONTH}_BACK.mp4"
+
 for filename in "${IMAGE_DIR}${LAST_MONTH}"*_FRONT.mp4; do
     [ -e "$filename" ] || continue
     echo "file '${filename}'" >> ${FRONT_FILES}
@@ -21,15 +24,11 @@ for filename in "${IMAGE_DIR}${LAST_MONTH}"*_BACK.mp4; do
 done
 
 # concat mp4s
-ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${FRONT_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_FRONT.mp4
-ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${BACK_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${IMAGE_DIR}${LAST_MONTH}_BACK.mp4 
+ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${FRONT_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${FRONT_VIDEO}
+ffmpeg -hide_banner -r 30 -f concat -safe 0 -i ${BACK_FILES} -vcodec libx264 -crf 28 -preset veryslow -pix_fmt yuv420p ${BACK_VIDEO}
 
 # delete mp4s
-
-# delete the front/back file lists
-# # delete images used 
-# # rm "${IMAGE_DIR}${YESTERDAY}*.jpg"
-# find ${IMAGE_DIR} -type f -name "${YESTERDAY}*.jpg" -exec rm {} +
+find ${IMAGE_DIR} -maxdepth 1 -type f -name "${LAST_MONTH}*.mp4" -exec rm {} +
 
 # Delete file list documents
 rm ${FRONT_FILES}
@@ -39,17 +38,17 @@ rm ${BACK_FILES}
 conda activate timelapse
 
 youtube-upload \
-    --title="${LAST_MONTH}" \
+    --title="${LAST_MONTH}_FRONT" \
     --description="Timelapse video" \
     --client-secrets="client_secrets.json" \
     --playlist="Timelapse Front" \
     --privacy="private" \
-    ${IMAGE_DIR}${LAST_MONTH}_FRONT.mp4 
+    ${FRONT_VIDEO}
 
 youtube-upload \
-    --title="${LAST_MONTH}" \
+    --title="${LAST_MONTH}_BACK" \
     --description="Timelapse video" \
     --client-secrets="client_secrets.json" \
     --playlist="Timelapse Back" \
     --privacy="private" \
-    ${IMAGE_DIR}${LAST_MONTH}_BACK.mp4 
+    ${BACK_VIDEO} 
