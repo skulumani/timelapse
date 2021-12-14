@@ -25,8 +25,8 @@ fi
 # ffmpeg -i "rtmp://192.168.88.12:1935/live/front" -r 1 -t 1 ${STARTTIME}.jpg
 # ffmpeg -i "rtmp://192.168.88.12:1935/live/back" -r 1 -t 1 ${STARTTIME}.jpg
 
-ffmpeg -i "rtmp://${CAM_USERNAME}:${CAM_PASSWORD}@${FRONT_IP}/bcs/channel0_main.bcs?token=ssdad&channel=0&stream=0&user=${CAM_USERNAME}&password=${CAM_PASSWORD}" -t 1 -r 1 ${IMAGE_DIR}${FRONT_CAM}.jpg &
-ffmpeg -i "rtmp://${CAM_USERNAME}:${CAM_PASSWORD}@${BACK_IP}/bcs/channel0_main.bcs?token=sdasdasd&channel=0&stream=0&user=${CAM_USERNAME}&password=${CAM_PASSWORD}" -t 1 -r 1 ${IMAGE_DIR}${BACK_CAM}.jpg &
+ffmpeg -hide_banner -i "rtmp://${CAM_USERNAME}:${CAM_PASSWORD}@${FRONT_IP}/bcs/channel0_main.bcs?token=ssdad&channel=0&stream=0&user=${CAM_USERNAME}&password=${CAM_PASSWORD}" -t 1 -r 1 ${IMAGE_DIR}${FRONT_CAM}.jpg &
+ffmpeg -hide_banner -i "rtmp://${CAM_USERNAME}:${CAM_PASSWORD}@${BACK_IP}/bcs/channel0_main.bcs?token=sdasdasd&channel=0&stream=0&user=${CAM_USERNAME}&password=${CAM_PASSWORD}" -t 1 -r 1 ${IMAGE_DIR}${BACK_CAM}.jpg &
 
 
 # convert to video
