@@ -1,5 +1,5 @@
 #!/bin/sh
-# Create timelapse from the previous day
+# Combine daily MP4s into a single monthly video and upload to youtube
 
 YESTERDAY=$(date -d "yesterday" +"%Y%m%d")
 LAST_MONTH=$(date -d "last month" +"%Y%m")
@@ -35,20 +35,20 @@ rm ${FRONT_FILES}
 rm ${BACK_FILES}
 
 # Upload to youtube
-conda activate timelapse
+# conda activate timelapse
 
-youtube-upload \
-    --title="${LAST_MONTH}_FRONT" \
-    --description="Timelapse video" \
-    --client-secrets="client_secrets.json" \
-    --playlist="Timelapse Front" \
-    --privacy="private" \
-    ${FRONT_VIDEO}
+# youtube-upload \
+#     --title="${LAST_MONTH}_FRONT" \
+#     --description="Timelapse video" \
+#     --client-secrets="client_secrets.json" \
+#     --playlist="Timelapse Front" \
+#     --privacy="private" \
+#     ${FRONT_VIDEO}
 
-youtube-upload \
-    --title="${LAST_MONTH}_BACK" \
-    --description="Timelapse video" \
-    --client-secrets="client_secrets.json" \
-    --playlist="Timelapse Back" \
-    --privacy="private" \
-    ${BACK_VIDEO} 
+# youtube-upload \
+#     --title="${LAST_MONTH}_BACK" \
+#     --description="Timelapse video" \
+#     --client-secrets="client_secrets.json" \
+#     --playlist="Timelapse Back" \
+#     --privacy="private" \
+#     ${BACK_VIDEO} 
