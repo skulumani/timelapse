@@ -1,6 +1,8 @@
 #!/bin/sh
 # Combine daily MP4s into a single monthly video and upload to youtube
 
+curl -m 10 --retry 5 https://hc-ping.com/452ac808-5c44-47f0-94dc-aa9e8f5b8210/start
+
 YESTERDAY=$(date -d "yesterday" +"%Y%m%d")
 LAST_MONTH=$(date -d "last month" +"%Y%m")
 THIS_MONTH=$(date -d "this month" +"%Y%m")
@@ -52,3 +54,6 @@ rm ${BACK_FILES}
 #     --playlist="Timelapse Back" \
 #     --privacy="private" \
 #     ${BACK_VIDEO} 
+
+
+curl -m 10 --retry 5 https://hc-ping.com/452ac808-5c44-47f0-94dc-aa9e8f5b8210
