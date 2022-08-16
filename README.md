@@ -3,7 +3,6 @@
 Security camera timelapse script
 
 1. Create/update conda environment
-
 ~~~
 conda env update --file timelapse.yml --prune
 ~~~
@@ -24,6 +23,6 @@ conda env update --file timelapse.yml --prune
 
 * Copy `timelapse_month.service` to `/etc/systemd/system/timelapse_month.service`
 * Copy `timelapse_month.timer` to `/etc/systemd/system`
-* Enable using `systemctl enable timelapse_month.timer`
+* Enable using `systemctl enable --now timelapse_month.timer` to start the timer
 
 
