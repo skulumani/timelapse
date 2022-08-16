@@ -1,5 +1,6 @@
 [Unit]
 Description=Timer for monthly timelapse
+Requires=timelapse_month.service
 
 [Timer]
 OnCalendar=*-*-02 08:00:00
