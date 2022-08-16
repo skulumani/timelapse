@@ -1,0 +1,6 @@
+[Unit]
+Description=Create timelapse of daily images over a single month
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /home/shankar/Documents/timelapse/timelapse_month.sh 

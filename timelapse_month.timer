@@ -1,0 +1,10 @@
+[Unit]
+Description=Timer for monthly timelapse
+
+[Timer]
+OnCalendar=*-*-02 08:00:00
+Unit=timelapse_month.service
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
